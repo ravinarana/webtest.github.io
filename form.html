@@ -1,0 +1,112 @@
+<html>
+    <head>
+    <style>
+          body{
+            background-color: rgb(31, 76, 94);
+            color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+          }
+          .maindiv{
+                 border: 5px solid aliceblue;
+                 border-radius: 10px;;
+                 padding:40px;
+                 box-sizing: content-box;
+                background-color: rgb(68, 53, 53);
+
+          }
+          
+          table , button{
+            margin-top: 10px;
+          }
+         td{
+          border:1px solid aliceblue;
+          padding:10px;
+          
+         }
+           
+    </style>
+    </head>
+    <body>
+      <div class="maindiv">
+         <div id="container">
+
+            <label for="files" class="button">CHOOSE FOLDER</label>
+            <input type="file" id="files" style = "display:none;" class="input"  multiple onchange='displayDetails()'/>
+          
+          </div>
+          
+          <button  onmouseover="show()" >info</button>
+          <br>
+           <table id="display" style="border:1px solid aliceblue; border-spacing: 0;">
+        
+            <tr style="border:1px solid aliceblue;">
+         
+                      <td>FILE NAME</td>
+                      <td>FILE SIZE</td>
+                      <td>FILE TYPE</td>
+            </tr>
+               
+          </table>
+ </div>     
+<!-- script -->
+
+          <script>
+                 var row = 1;
+                 
+                 function displayDetails(){
+                  var fileinfo = document.getElementById('files');
+                  
+                   var fname = fileinfo.files.item(0).name;
+                   var fsize = fileinfo.files.item(0).size;
+                   var ftype = fileinfo.files.item(0).type;
+                
+                   var newRow = display.insertRow(row);
+
+                   var  Cell1 = newRow.insertCell(0);
+                   var  Cell2 = newRow.insertCell(1);
+                   var  Cell3 = newRow.insertCell(2);
+
+                    
+  
+                    if (fsize >= 1073741824 ){
+                      Cell2.innerHTML = (fsize / 1073741824). toFixed(2) + 'GB' ;}
+                   
+                      else if (fsize >= 1048576) {
+                        Cell2.innerHTML  =  (fsize / 1048576). toFixed(2) + 'MB' ;}
+                    
+                    else if (fsize >= 1024) {
+                      Cell2.innerHTML  = (fsize / 1024). toFixed(2) + 'KB' ;}
+                    
+                    else if (fsize > 1) {
+                      Cell2.innerHTML  =  fsize + 'btyes' ;}
+                  
+                    else if (fsize == 1) {
+                    Cell2.innerHTML = (fsize + 'byte' );}
+
+                    else 
+                     Cell2.innerHTML = fsize ;
+                    
+                    
+                 
+
+                          Cell1.innerHTML = fname;
+                          
+                          Cell3.innerHTML = ftype;
+                             row++;            
+                     }
+
+
+              function show () {
+       var name = document.getElementById('files'); 
+          alert('Selected file name: ' + name.files.item(0).name);
+          alert('Selected file size: ' + name.files.item(0).size );
+          alert('Selected file type: ' + name.files.item(0).type);
+    };
+
+              
+          </script>
+    </body>
+</html>
